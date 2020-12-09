@@ -1,22 +1,9 @@
 {
-  "name": "express-4.x-local-example",
+  "name": "express_passportjs_local_authentication_with_html_files",
   "version": "0.0.0",
-  "description": "Express 4.x app using Passport for authentication with username and password.",
-  "keywords": [
-    "example",
-    "express",
-    "passport"
-  ],
-  "author": "Jared Hanson",
+  "description": "Username + Password authentication in Express using passportjs with HTML files - taken from https://github.com/passport/express-4.x-local-example ",
   "license": "Unlicense",
   "homepage": "https://github.com/passport/express-4.x-local-example",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/passport/express-4.x-local-example.git"
-  },
-  "bugs": {
-    "url": "https://github.com/passport/express-4.x-local-example/issues"
-  },
   "dependencies": {
     "body-parser": "^1.19.0",
     "connect-ensure-login": "^0.1.1",

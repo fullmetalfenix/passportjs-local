@@ -65,7 +65,7 @@ app.get('/',
 
 app.get('/login',
   function(req, res){
-    res.sendFile(path.join(__dirname + '/no.html'));
+    res.sendFile(path.join(__dirname + '/noAccess.html'));
   });
   
 app.post('/login', 
@@ -76,8 +76,15 @@ app.post('/login',
 
   
   app.get('/welcome',
+  require('connect-ensure-login').ensureLoggedIn(),
   function(req, res){
-    res.sendFile(path.join(__dirname + '/welcome.html'));
+    console.log(req.user.displayName)
+    if(req.user.role === 'admin'){
+      res.sendFile(path.join(__dirname + '/welcomeAdmin.html'));
+    }else if(req.user.role === 'user'){
+      res.sendFile(path.join(__dirname + '/welcome.html'));
+    }else{
+    }
   });
 
 
