@@ -2,8 +2,6 @@
   "name": "express_passportjs_local_authentication_with_html_files",
   "version": "0.0.0",
   "description": "Username + Password authentication in Express using passportjs with HTML files - taken from https://github.com/passport/express-4.x-local-example ",
-  "license": "Unlicense",
-  "homepage": "https://github.com/passport/express-4.x-local-example",
   "dependencies": {
     "body-parser": "^1.19.0",
     "connect-ensure-login": "^0.1.1",
