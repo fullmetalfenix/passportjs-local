@@ -66,10 +66,6 @@ app.use(passport.session());
 
 // Define routes.
 
-app.get('/test', 
-  function(req,res){
-  res.render('test', user);
-}); 
 
 
 app.get('/',
@@ -101,7 +97,12 @@ app.post('/login',
     }
   });
 
-
+  app.get('/test', 
+  require('connect-ensure-login').ensureLoggedIn(),
+  function(req,res){
+    res.render('test', { name: req.user.displayName });
+  }); 
+  
 app.get('/logout',
   function(req, res){
     req.logout();
