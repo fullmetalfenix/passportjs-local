@@ -44,12 +44,6 @@ passport.deserializeUser(function(id, cb) {
 // Create a new Express application.
 var app = express();
 
-
-// React for view engine
-app.set('views', __dirname + '/views');
-app.set('view engine', 'jsx');
-app.engine('jsx', require('express-react-views').createEngine());
-
 // Use application-level middleware for common functionality, including
 // logging, parsing, and session handling.
 
@@ -58,16 +52,13 @@ app.use(express.static('public'))
 app.use(require('morgan')('combined'));
 app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
- 
+
 // Initialize Passport and restore authentication state, if any, from the
 // session.
 app.use(passport.initialize());
 app.use(passport.session());
 
 // Define routes.
-
-
-
 app.get('/',
   function(req, res) {
     res.sendFile(path.join(__dirname + '/index.html'))
@@ -91,23 +82,29 @@ app.post('/login',
     console.log(req.user.displayName)
     if(req.user.role === 'admin'){
       res.sendFile(path.join(__dirname + '/welcomeAdmin.html'));
-    }else if(req.user.role === 'user'){
-      res.sendFile(path.join(__dirname + '/welcome.html'));
-    }else{
     }
+      res.sendFile(path.join(__dirname + '/welcome.html'));
   });
 
-  app.get('/test', 
-  require('connect-ensure-login').ensureLoggedIn(),
-  function(req,res){
-    res.render('test', { name: req.user.displayName });
-  }); 
-  
+
 app.get('/logout',
   function(req, res){
     req.logout();
     res.redirect('/');
   });
+
+app.get('/protected',
+function(req, res){
+  if(req.user.role === "admin"){
+    res.json({"adminAuth": "Yes"})
+  }else{
+    res.json({"adminAuth": "NO!!!"})
+  }
+
+}
+
+)
+
 
 app.get('/profile',
   require('connect-ensure-login').ensureLoggedIn(),
