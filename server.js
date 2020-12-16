@@ -51,7 +51,16 @@ app.use(express.static('public'))
 
 app.use(require('morgan')('combined'));
 app.use(require('body-parser').urlencoded({ extended: true }));
-app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+app.use(require('express-session')({ secret: 'new@secret!goes#here*', resave: false, saveUninitialized: false }));
+
+
+
+// Set React as view engine
+app.set('views', __dirname + '/views');
+app.set('view engine', 'jsx');
+app.engine('jsx', require('express-react-views').createEngine());
+
+
 
 // Initialize Passport and restore authentication state, if any, from the
 // session.
@@ -100,10 +109,16 @@ function(req, res){
   }else{
     res.json({"adminAuth": "NO!!!"})
   }
-
 }
-
 )
+
+app.get('/profile',
+require('connect-ensure-login').ensureLoggedIn(),
+function(req, res){
+  res.render('profile', { name: req.user.displayName });
+ }
+)
+
 
 var protectedRoutes = require('./routes/protectedRoutes');
 
