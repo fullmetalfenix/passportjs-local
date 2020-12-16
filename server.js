@@ -105,6 +105,12 @@ function(req, res){
 
 )
 
+var protectedRoutes = require('./routes/protectedRoutes');
+
+// ...
+
+app.use('/protectedRoutes', protectedRoutes)
+
 
 app.get('/profile',
   require('connect-ensure-login').ensureLoggedIn(),
@@ -112,4 +118,6 @@ app.get('/profile',
     res.render('profile', { user: req.user });
   });
 
-app.listen(3000);
+app.listen(3000, function(){
+  console.log('I\'m Listening...')
+});
