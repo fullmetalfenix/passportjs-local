@@ -111,13 +111,6 @@ var protectedRoutes = require('./routes/protectedRoutes');
 
 app.use('/protectedRoutes', protectedRoutes)
 
-
-app.get('/profile',
-  require('connect-ensure-login').ensureLoggedIn(),
-  function(req, res){
-    res.render('profile', { user: req.user });
-  });
-
 app.listen(3000, function(){
   console.log('I\'m Listening...')
 });
