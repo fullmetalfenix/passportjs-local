@@ -1,5 +1,9 @@
 Whats going on here?
 
-Express project, uses express-generator boilerplate - implements basic user login through passport - checks flat file repository / database for user accounts. 
- - stores user info through sessions in a http only cookie. 
- - implemented basic protected route. 
+Express project, uses express-generator boilerplate - implements basic user login through passport - checks flat file repository / 'database' for user accounts. 
+ - stores user info through sessions in an encrypted cookie with HttpOnly flag.
+ - Once logged in redirects user to personalized welcome page based on role  ('/welcome')
+ - implemented basic protected route. ('/protected') only available if logged in as admin
+ - Profile page ('/profile') reads your name once logged in.
+ - modular 'protectedRoutes' available to everyone who is logged in.
+ 
