@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Poppins:wght@200&display=swap');
+/* font-family: 'Abril Fatface', cursive;
+font-family: 'Poppins', sans-serif; */
+
 body{
     background: url(./bg.jfif);
     background-size: cover;
@@ -7,9 +11,15 @@ body{
     align-items: center;
 }
 h1, h2, label{
+    color: rgba(250,250,250, .87)
+}
+h1{
  padding: 0px;
  margin: 5px;
- color: rgba(250,250,250, .87)
+ font-family: 'Abril Fatface', cursive !important;
+}
+h2, label{
+    font-family: 'Poppins', sans-serif !important;
 }
 form div{
     min-width: 350px;
@@ -20,13 +30,13 @@ form div{
 input[type="submit"]{
     font-weight: 600;
     font-size:18px;
-    text-transform: uppercase;
     padding: 10px;
     width: 100%;
     border-radius: 5px;
-    background:rgba(11, 3, 124, .5);
+    background:rgb(66 76 249);
     color: rgba(250,250,250,.87);
     box-shadow: 0px 2px 1px rgba(0,0,0,.73);
+    font-family: 'Poppins', sans-serif;
 }
 h1{
     font-size: 42px;
@@ -37,13 +47,18 @@ h2, label{
 }
 h2{
     text-shadow: 0px 2px 3px rgba(0,0,0,.3);
+    margin: 0px;
+    padding: 0px;
+}
+form > div{
+    margin-bottom: 20px;
 }
 label{
-    min-width: 100px;
-    text-transform: uppercase;
+    min-width: 120px;
+    font-size: 18px;
 }
 input{
-    padding: 5px 5px;
+    padding: 10px 10px;
     box-sizing: border-box;
     border-radius: 5px;
     border: none;
@@ -55,7 +70,7 @@ form{
 .login-container{
     min-height: 300px;
     min-width: 500px;
-    background: rgba(250,250,250, .15);
+    background: rgba(50,50,50, .8);
     backdrop-filter: blur(5px);
     padding: 0px 20px;
     display: flex;

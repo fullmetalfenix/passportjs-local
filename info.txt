@@ -1,0 +1,5 @@
+Whats going on here?
+
+Express project, uses express-generator boilerplate - implements basic user login through passport - checks flat file repository / database for user accounts. 
+ - stores user info through sessions in a http only cookie. 
+ - implemented basic protected route. 

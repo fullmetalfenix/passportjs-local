@@ -1,7 +1,7 @@
 var React = require('react');
 
-function HelloMessage(props) {
+function Profile(props) {
   return <div>Hello {props.name}</div>;
 }
 
-module.exports = HelloMessage;
+module.exports = Profile;
