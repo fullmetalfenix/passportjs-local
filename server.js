@@ -4,7 +4,15 @@ var Strategy = require("passport-local").Strategy;
 var db = require("./db");
 var path = require("path");
 var app = express();
+
+const session = require('express-session');
+const MySQLStore = require('express-mysql-session')(session);
+
+
 // Configure the local strategy for use by Passport.
+
+
+
 
 passport.use(
   new Strategy(function (username, password, cb) {
@@ -45,13 +53,26 @@ app.use(express.static("public"));
 
 app.use(require("morgan")("combined"));
 app.use(require("body-parser").urlencoded({ extended: true }));
-app.use(
-  require("express-session")({
-    secret: "new@secret!goes#here*",
-    resave: false,
-    saveUninitialized: false,
-  })
-);
+
+const options = {
+	host: 'localhost',
+	port: 3306,
+	user: 'Admin',
+	password: 'dmF2ORWQZgEhRz6n', // fake pw - just for demo
+	database: 'session_store_express'
+};
+
+const sessionStore = new MySQLStore(options);
+
+app.use(session({
+	key: 'session_cookie_name',
+	secret: 'session_cookie_secret',
+	store: sessionStore,
+	resave: false,
+	saveUninitialized: false
+}));
+
+
 
 // Set React as view engine
 app.set("views", __dirname + "/views");
@@ -74,7 +95,7 @@ app.get("/login", function (req, res) {
 
 app.post(
   "/login",
-  passport.authenticate("local", { failureRedirect: "/login" }),
+  passport.authenticate("local", { failureRedirect: "/" }),
   function (req, res) {
     res.redirect("/welcome");
   }
@@ -114,7 +135,7 @@ app.get(
   "/profile",
   require("connect-ensure-login").ensureLoggedIn(),
   function (req, res) {
-    res.render("profile", { name: req.user.displayName });
+    res.render("profile", { name: req.user.displayName, email: req.user.emails[0].value, username: req.user.displayName });
   }
 );
 
